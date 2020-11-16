@@ -1,13 +1,39 @@
 import React, {useEffect, useState} from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, Dimensions, StyleSheet, Text, View } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 
 
 function DetailAppointment({route, navigation}){
-    console.log(route.params.detail)
-    const {identification, name, lastname, birthday, city, neighborhood, cellphoneNumber} = route.params.detail;
-    return <View style={styles.container}>
+    
+    const {identification, name, lastname, birthday, city, neighborhood, cellphoneNumber, _id} = route.params.detail;
+        
+    const deleteAppoinment = async () =>{
+        try {
+            const response = await fetch(
+              ("https://momento2m3.herokuapp.com/appointments/delete_medical_appointment/" + _id),
+              {
+                method: "DELETE",
+                headers: {
+                  Accept: 'application/json, text/plain, */*',
+                  "Content-Type": "application/json",
+                },                
+              }             
+            );
+            const json = await response.json();            
+            Alert.alert("Appointment deleted successfully");
+            navigation.goBack();
+          } catch (error) {
+            console.log(error);
+            Alert.alert('Error:', error.message);
+          }
+    }
+
+    const updateAppointment = ()=>{
+        navigation.navigate('Update', {dataAppoint:route.params.detail});
+    }
+    return (
+    <View style={styles.container}>
                 <View style={styles.detailCard}>
                     <Text style={styles.textID}>ID:  {identification}  </Text>
                     <Text style={styles.textItem}>Name:  {name}  {lastname} </Text>
@@ -17,11 +43,11 @@ function DetailAppointment({route, navigation}){
                     <Text  style={styles.textItem}>Birthday:  {birthday} </Text>
                     <View style={styles.viewButtons}>
                         <TouchableHighlight style={styles.buttonEdit}>
-                                <Text style={styles.textButtons}>
+                                <Text onPress={updateAppointment} style={styles.textButtons}>
                                     EDIT
                                 </Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={styles.buttonDelete}>
+                        <TouchableHighlight onPress={deleteAppoinment} style={styles.buttonDelete}>
                                 <Text style={styles.textButtons}>
                                     DELETE
                                 </Text>
@@ -30,6 +56,7 @@ function DetailAppointment({route, navigation}){
 
                 </View>  
     </View>
+    )
 }
 
 
@@ -58,7 +85,9 @@ const styles = StyleSheet.create({
         paddingLeft:15,
         paddingBottom:5,
         paddingTop:5, 
-        borderRadius:5
+        borderRadius:5, 
+        width: Dimensions.get('screen').width * 0.3,
+        alignItems:'center'
     },
     buttonDelete:{
         backgroundColor:'red',
@@ -67,7 +96,9 @@ const styles = StyleSheet.create({
         paddingLeft:15,
         paddingBottom:5,
         paddingTop:5,  
-        borderRadius:5
+        borderRadius:5,
+        width: Dimensions.get('screen').width * 0.3,
+        alignItems:'center'
     },
     textButtons: {
     fontSize: 20,
@@ -91,3 +122,16 @@ const styles = StyleSheet.create({
   
 export default DetailAppointment;
 
+
+
+/**
+ {
+    "name": "Carlos",
+    "lastname": "Rico",
+    "identification": 123456789,
+    "birthday": "2010-12-12",
+    "city": "Medellin",
+    "neighborhood": "Belen",
+    "cellphoneNumber": 987654321    
+} 
+ */

@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ListAppointments from './screens/list-appointments/list-appointments';
 import CreateAppointment from './screens/create-appointment/create-appointment';
 import DetailAppointment from './detail-appoinment/detail';
+import UpdateAppointment from './screens/update-appointment/update-appintment';
 
 
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="Home" component={ListAppointments} />
         <Stack.Screen name="Create" component={CreateAppointment} />
         <Stack.Screen name="Detail" component={DetailAppointment} />
+        <Stack.Screen name="Update" component={UpdateAppointment} />
       </Stack.Navigator>
     </NavigationContainer>
   );
