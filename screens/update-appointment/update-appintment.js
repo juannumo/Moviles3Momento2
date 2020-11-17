@@ -57,8 +57,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
    return (
-     <View style={styles.container}>
-       <Text>Create Appointment</Text>
+     <View style={styles.container}>       
        <TextInput
         value={name}
          placeholder="Name"
@@ -117,27 +116,31 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#236b73',
     flexDirection:"column", 
     alignItems:"center"
   },
   textInput: {
-    marginTop:10,
+    backgroundColor:'#e3e3e3',
+    marginTop:25,
     padding:10,
-    borderColor: "purple",
+    borderColor: "#88d2da",
     borderWidth:1,
     borderRadius:5,
     width: Dimensions.get('screen').width*0.9
   },
   buttonUpdate: {
     marginTop:10,
-    backgroundColor: "purple",
+    backgroundColor: "#88d2da",
     padding: 15,
     alignItems:"center",
-    borderRadius:25
+    borderRadius:25,
+    
+    width: Dimensions.get('screen').width * 0.5
   },
   textButtonUpdate: {
-    color: "white"
+    color: "black",
+    fontSize:22
   },
 
 

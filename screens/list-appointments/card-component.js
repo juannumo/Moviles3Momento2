@@ -5,9 +5,9 @@ import { StyleSheet, Text, View } from "react-native";
 
 function CardComponent(props){
     const {identification, name, lastname, birthday, city, neighborhood, cellphoneNumber} = props.appointment;
-    return <View>
-        <Text> {identification}  </Text>
-        <Text> {name}  {lastname} </Text>
+    return <View style={styles.container}>
+        <Text style={styles.textComponent}>Id:  {identification}  </Text>
+        <Text style={styles.textComponent}>Name:  {name}  {lastname} </Text>
     </View>
 }
 
@@ -15,17 +15,15 @@ function CardComponent(props){
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      flexDirection: "column",
-    },
-    buttonCreate: {
-      backgroundColor: "red",
-      padding: 15,
-      alignItems:"center"
-    },
-    teaxtButtonCreate: {
-      color: "white"
+      padding:5,
+      backgroundColor: "#88d2da",
+      
+    },    
+    textComponent: {
+      fontSize:20,
+      color: "black",
+      margin:5
+      
     },
   });
   

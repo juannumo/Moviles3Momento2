@@ -17,7 +17,7 @@ function ListAppointments({ navigation }) {
     setAppointments(json);
   }
   useEffect(()=>{
-    console.log("is focused: "+isFocused);
+    console.log("is focused: " + isFocused);
     getAppointments();
   }, [isFocused])
 
@@ -38,19 +38,24 @@ function ListAppointments({ navigation }) {
         style={styles.buttonCreate}
         onPress={() => navigation.navigate('Create')}
       >
-        <Text style={styles.teaxtButtonCreate}>Create appoinment</Text>
+          <Text style={styles.teaxtButtonCreate}>Click to create an Appointment</Text>
       </TouchableHighlight>
-      <FlatList 
-      data={appoinments} 
-      renderItem={({item}) => 
-      <TouchableHighlight onPress={()=> detailAppoinment(item)} style={styles.listItem}>        
-        <CardComponent appointment={item}>
-        </CardComponent>
-      </TouchableHighlight>}
-      keyExtractor={item => item._id}
-       >
 
-      </FlatList>
+      <View style={styles.containerAppoint}>
+
+        <FlatList 
+        data={appoinments} 
+        renderItem={({item}) => 
+          <TouchableHighlight onPress={()=> detailAppoinment(item)} style={styles.listItem}>        
+            <CardComponent appointment={item} style={styles.cardComponent}>
+            </CardComponent>
+          </TouchableHighlight>}
+          keyExtractor={item => item._id}
+          >
+        </FlatList>
+
+      </View>
+      
     </View>
   );
 }
@@ -58,78 +63,47 @@ function ListAppointments({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#236b73",
     flexDirection: "column",
     alignItems: 'center'    
   },
   buttonCreate: {
+    marginBottom:15,
     marginTop: 10,
-    backgroundColor: "red",
     padding: 15,
     alignItems:"center",
-    width: Dimensions.get('screen').width * 0.8,
+    justifyContent:'center',
     borderRadius: 25
   },
   teaxtButtonCreate: {
-    color: "white"
+    color: "white",
+    fontSize:25,
+    fontWeight:'bold',
+    alignSelf:'center',
+    justifyContent:'center'
   },
   listItem:{
-    marginTop: 5,
-    padding: 5,
-    borderColor: 'red',
+    marginTop: 10,
+    padding: 0,
+    borderColor: '#236b73',
     borderWidth: 1,
     borderRadius: 5,
-    width: Dimensions.get('screen').width * 0.8
+    width: Dimensions.get('screen').width * 0.8,
+    
+  },
+  containerAppoint: {
+    flex: 1,
+    backgroundColor: "#ffffff",
+    flexDirection: "column",
+    alignItems: 'center',
+    width: Dimensions.get('screen').width * 0.9,
+    marginBottom:20
+  },
+  cardComponent:{
+    fontSize:25
   }
 
 });
 
 export default ListAppointments;
-
-
-
-/*
-function ListAppointments({navigation}) {
-  const isFocused = useIsFocused();
-  const [appoinments, setAppointments] = useState([]);
-  const getAppointments = async ()=>{
-    let response = await fetch('https://momento2m3.herokuapp.com/appointments/get_medical_appointments');
-    let json = await response.json();
-    setAppointments(json);
-  }
-  useEffect(()=>{
-    console.log("is focused: "+isFocused);
-    getAppointments();
-  }, [isFocused])
-
-  const detailAppoinment = (data) =>{
-    try {
-      navigation.navigate('Detail', {detail : data});
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }  
-  }
-
-  return (
-    <View style={styles.container}>
-      <TouchableHighlight
-        style={styles.buttonCreate}
-        onPress={() => navigation.navigate('Create')}
-      >
-        <Text style={styles.teaxtButtonCreate}>Create appoinment</Text>
-      </TouchableHighlight>
-      <FlatList data={appoinments} 
-      renderItem={({item}) =><TouchableHighlight onPress={()=> detailAppoinment(item)} style={styles.listItem}>        
-        <CardComponent appointment={item}>
-        </CardComponent>
-      </TouchableHighlight>}
-      keyExtractor={item => item._id}
-       >
-
-      </FlatList>
-    </View>
-  );
-}
-*/
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Alert, Dimensions, StyleSheet, Text, View } from "react-native";
+import { Alert, Dimensions, StyleSheet, Text, View, Image } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 
@@ -35,19 +35,21 @@ function DetailAppointment({route, navigation}){
     return (
     <View style={styles.container}>
                 <View style={styles.detailCard}>
-                    <Text style={styles.textID}>ID:  {identification}  </Text>
+                    <Text style={styles.textID}>Id:  {identification}  </Text>
                     <Text style={styles.textItem}>Name:  {name}  {lastname} </Text>
                     <Text  style={styles.textItem} >Phone Number:  {cellphoneNumber} </Text>
                     <Text  style={styles.textItem}>City:  {city} </Text>
                     <Text  style={styles.textItem}>Neighborhood:  {neighborhood} </Text>
                     <Text  style={styles.textItem}>Birthday:  {birthday} </Text>
                     <View style={styles.viewButtons}>
-                        <TouchableHighlight style={styles.buttonEdit}>
-                                <Text onPress={updateAppointment} style={styles.textButtons}>
+                        <TouchableHighlight 
+                        onPress={updateAppointment} style={styles.buttonEdit}>
+                                <Text style={styles.textButtons}>
                                     EDIT
                                 </Text>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={deleteAppoinment} style={styles.buttonDelete}>
+                        <TouchableHighlight 
+                        onPress={deleteAppoinment} style={styles.buttonDelete}>
                                 <Text style={styles.textButtons}>
                                     DELETE
                                 </Text>
@@ -55,6 +57,10 @@ function DetailAppointment({route, navigation}){
                     </View>
 
                 </View>  
+                <Image
+        style={styles.imageBack}
+        source={require('../images/Image_2.jpg')}
+    />
     </View>
     )
 }
@@ -71,7 +77,8 @@ const styles = StyleSheet.create({
         padding:10,
         borderRadius:5,
         borderWidth:1,
-        borderColor: 'black',     
+        borderColor: 'black', 
+        backgroundColor: "#88d2da"    
         
     },
     viewButtons: {        
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between'
     },
     buttonEdit:{
-        backgroundColor:'orange',
+        backgroundColor:'#2f909a',
         margin: 10,
         paddingRight:15,
         paddingLeft:15,
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     buttonDelete:{
-        backgroundColor:'red',
+        backgroundColor:'#2f909a',
         margin: 10,
         paddingRight:15,
         paddingLeft:15,
@@ -117,7 +124,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color:'black',
         alignSelf:'flex-end'
-    }
+    },
+    imageBack:{
+        marginTop:5,
+        width: 370,
+        height: 320,
+        marginStart:25
+      }
   });
   
 export default DetailAppointment;
