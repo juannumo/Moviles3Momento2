@@ -11,17 +11,23 @@ function HomeAppointments({ navigation }) {
   
   return (
     <View style={styles.container}>
-    <View  style={styles.containerLogo}>
-    <Image
-        style={styles.imagelogo}
-        source={require('../../images/Logo_1.png')}
-        />
-    </View>
-        
-    <Image
-        style={styles.imageBack}
-        source={require('../../images/Image_1.png')}
-    />
+      <View  style={styles.containerLogo}>
+      <Image
+          style={styles.imagelogo}
+          source={require('../../images/Logo_1.png')}
+          />
+      </View>
+      <TouchableHighlight onPress={() => navigation.navigate('List')}
+      activeOpacity={1}
+      underlayColor=""
+      >
+      <Image
+          style={styles.imageBack}
+          source={require('../../images/Image_1.png')}
+          
+      />
+      </TouchableHighlight>
+      
 
             <TouchableHighlight
                 underlayColor="#236b73"

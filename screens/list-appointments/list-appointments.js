@@ -17,7 +17,7 @@ function ListAppointments({ navigation }) {
     setAppointments(json);
   }
   useEffect(()=>{
-    console.log("is focused: " + isFocused);
+    //console.log("is focused: " + isFocused);
     getAppointments();
   }, [isFocused])
 
@@ -25,8 +25,7 @@ function ListAppointments({ navigation }) {
     try {
       navigation.navigate('Detail', {
         detail: data,
-      });
-      // console.log(data);
+      });      
     } catch (error) {
       console.log(error);
     }  
@@ -46,7 +45,9 @@ function ListAppointments({ navigation }) {
         <FlatList 
         data={appoinments} 
         renderItem={({item}) => 
-          <TouchableHighlight onPress={()=> detailAppoinment(item)} style={styles.listItem}>        
+          <TouchableHighlight onPress={()=> detailAppoinment(item)} 
+          style={styles.listItem}          
+          >        
             <CardComponent appointment={item} style={styles.cardComponent}>
             </CardComponent>
           </TouchableHighlight>}
@@ -85,8 +86,10 @@ const styles = StyleSheet.create({
   listItem:{
     marginTop: 10,
     padding: 0,
-    borderColor: '#236b73',
-    borderWidth: 1,
+    borderRightWidth:5,
+    borderBottomWidth:5, 
+    borderRightColor: '#adc9c9', 
+    borderBottomColor: '#adc9c9',   
     borderRadius: 5,
     width: Dimensions.get('screen').width * 0.8,
     

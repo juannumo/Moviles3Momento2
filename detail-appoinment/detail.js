@@ -4,11 +4,27 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 
 
 
-function DetailAppointment({route, navigation}){
-    
-    const {identification, name, lastname, birthday, city, neighborhood, cellphoneNumber, _id} = route.params.detail;
-        
-    const deleteAppoinment = async () =>{
+function DetailAppointment({route, navigation}){    
+    const {identification, name, lastname, birthday, city, neighborhood, cellphoneNumber, _id} = route.params.detail;   
+
+    const createAlertDelete = ()=>Alert.alert(
+        'Delete: ',
+        'Do you want to continue?',
+        [
+            {
+             text: 'Cancel',             
+             style:'cancel'
+            },
+            {
+             text: 'Ok',
+             onPress: ()=> {
+                 deleteAppoinment()
+            }
+            
+            }
+          ]
+    );
+    const deleteAppoinment = async () =>{        
         try {
             const response = await fetch(
               ("https://momento2m3.herokuapp.com/appointments/delete_medical_appointment/" + _id),
@@ -21,11 +37,17 @@ function DetailAppointment({route, navigation}){
               }             
             );
             const json = await response.json();            
-            Alert.alert("Appointment deleted successfully");
+            Alert.alert(
+                'Delete: ',
+                'Appointment deleted successfully'
+                );
             navigation.goBack();
           } catch (error) {
             console.log(error);
-            Alert.alert('Error:', error.message);
+            Alert.alert(
+                'Delete: ',
+                'Error:', error.message
+                );
           }
     }
 
@@ -40,7 +62,7 @@ function DetailAppointment({route, navigation}){
                     <Text  style={styles.textItem} >Phone Number:  {cellphoneNumber} </Text>
                     <Text  style={styles.textItem}>City:  {city} </Text>
                     <Text  style={styles.textItem}>Neighborhood:  {neighborhood} </Text>
-                    <Text  style={styles.textItem}>Birthday:  {birthday} </Text>
+                    <Text  style={styles.textItem}>Birthday:  {(new Date(birthday)).getFullYear()}-{(new Date(birthday)).getMonth()+1}-{(new Date(birthday)).getDate()} </Text>
                     <View style={styles.viewButtons}>
                         <TouchableHighlight 
                         onPress={updateAppointment} style={styles.buttonEdit}>
@@ -49,7 +71,7 @@ function DetailAppointment({route, navigation}){
                                 </Text>
                         </TouchableHighlight>
                         <TouchableHighlight 
-                        onPress={deleteAppoinment} style={styles.buttonDelete}>
+                        onPress={createAlertDelete} style={styles.buttonDelete}>
                                 <Text style={styles.textButtons}>
                                     DELETE
                                 </Text>
@@ -76,8 +98,6 @@ const styles = StyleSheet.create({
     detailCard: {
         padding:10,
         borderRadius:5,
-        borderWidth:1,
-        borderColor: 'black', 
         backgroundColor: "#88d2da"    
         
     },
@@ -94,7 +114,11 @@ const styles = StyleSheet.create({
         paddingTop:5, 
         borderRadius:5, 
         width: Dimensions.get('screen').width * 0.3,
-        alignItems:'center'
+        alignItems:'center',
+        borderRightWidth:5,
+    borderBottomWidth:5, 
+    borderRightColor: '#677575', 
+    borderBottomColor: '#677575',   
     },
     buttonDelete:{
         backgroundColor:'#2f909a',
@@ -105,7 +129,11 @@ const styles = StyleSheet.create({
         paddingTop:5,  
         borderRadius:5,
         width: Dimensions.get('screen').width * 0.3,
-        alignItems:'center'
+        alignItems:'center',
+        borderRightWidth:5,
+    borderBottomWidth:5, 
+    borderRightColor: '#677575', 
+    borderBottomColor: '#677575',   
     },
     textButtons: {
     fontSize: 20,
@@ -136,15 +164,3 @@ const styles = StyleSheet.create({
 export default DetailAppointment;
 
 
-
-/**
- {
-    "name": "Carlos",
-    "lastname": "Rico",
-    "identification": 123456789,
-    "birthday": "2010-12-12",
-    "city": "Medellin",
-    "neighborhood": "Belen",
-    "cellphoneNumber": 987654321    
-} 
- */

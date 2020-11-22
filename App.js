@@ -30,7 +30,7 @@ const Stack = createStackNavigator();
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeAppointments}
-        options={{ title: 'My home',
+        options={{ title: 'Home',
         headerStyle: {
             backgroundColor: '#e3e3e3',
           },
@@ -62,7 +62,7 @@ const Stack = createStackNavigator();
          }}
         />
         <Stack.Screen name="Create" component={CreateAppointment} 
-          options={{ title: 'Create an Appoitnment',
+          options={{ title: 'Create an Appointment',
         headerStyle: {
             backgroundColor: '#e3e3e3',
           },
@@ -78,7 +78,7 @@ const Stack = createStackNavigator();
          }}
         />
         <Stack.Screen name="Detail" component={DetailAppointment} 
-          options={{ title: 'Check an Appoitnment',
+          options={{ title: 'Check an Appointment',
         headerStyle: {
             backgroundColor: '#e3e3e3',
           },
@@ -94,7 +94,7 @@ const Stack = createStackNavigator();
          }}
         />
         <Stack.Screen name="Update" component={UpdateAppointment} 
-          options={{ title: 'Update an Appoitnment',
+          options={{ title: 'Update an Appointment',
         headerStyle: {
             backgroundColor: '#e3e3e3',
           },
